@@ -27,22 +27,22 @@ public class Light : Aggregate
         switch (domainEvent)
         {
             case LightCreated e:
-                Handle(e);
+                OnLightCreated(e);
                 break;
             case LightConnected e:
-                Handle(e);
+                OnLightConnected(e);
                 break;
             case LightDisconnected e:
-                Handle(e);
+                OnLightDisconnected(e);
                 break;
             case LightTurnedOn e:
-                Handle(e);
+                OnLightTurnedOn(e);
                 break;
             case LightTurnedOff e:
-                Handle(e);
+                OnLightTurnedOff(e);
                 break;
             case LightDimmerValueUpdated e:
-                Handle(e);
+                OnLightDimmerValueUpdated(e);
                 break;
         }
     }
@@ -101,34 +101,35 @@ public class Light : Aggregate
         Apply(domainEvent);
     }
     
-    private void Handle(LightCreated domainEvent)
+    private void OnLightCreated(LightCreated domainEvent)
     {
         Id = domainEvent.Id;
         Name = domainEvent.Name;
     }
     
-    private void Handle(LightTurnedOn domainEvent)
+    private void OnLightTurnedOn(LightTurnedOn domainEvent)
     {
         IsOn = true;
     }
     
-    private void Handle(LightTurnedOff domainEvent)
+    private void OnLightTurnedOff(LightTurnedOff domainEvent)
     {
         IsOn = false;
     }
     
-    private void Handle(LightDisconnected domainEvent)
+    private void OnLightDisconnected(LightDisconnected domainEvent)
     {
         ConnectionStatus = DeviceConnectionStatus.Disconnected;
     }
 
-    private void Handle(LightConnected domainEvent)
+    private void OnLightConnected(LightConnected domainEvent)
     {
         ConnectionStatus = DeviceConnectionStatus.Connected;
     }
 
-    private void Handle(LightDimmerValueUpdated domainEvent)
+    private void OnLightDimmerValueUpdated(LightDimmerValueUpdated domainEvent)
     {
         DimmerValue = domainEvent.Value;
+        IsOn = true;
     }
 }

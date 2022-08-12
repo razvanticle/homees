@@ -136,6 +136,23 @@ public class LightTests
         sut.DimmerValue.Should().Be(expected);
     }
     
+    [Test]
+    public void SetDimmerValue_WhenLightIsOff_TurnOnAndUpdateValue()
+    {
+        // arrange
+        var sut = CreateSut();
+        sut.Connect();
+        sut.TurnOff();
+        const byte expected = 23;
+        
+        // act
+        sut.SetDimmerValue(expected);
+        
+        // assert
+        sut.DimmerValue.Should().Be(expected);
+        sut.IsOn.Should().Be(true);
+    }
+    
     [TestCase(0)]
     [TestCase(101)]
     public void SetDimmerValue_ValueOutOfRange_ThrowException(byte value)
