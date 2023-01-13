@@ -9,15 +9,15 @@ public abstract class Aggregate: Aggregate<Guid>, IAggregate
 public abstract class Aggregate<T> : IAggregate<T> where T : notnull
 {
     [NonSerialized] 
-    private readonly Queue<DomainEventBase> uncommittedEvents = new();
+    private readonly Queue<object> uncommittedEvents = new();
 
     public T Id { get; protected set; } = default!;
 
     public int Version { get; protected set; }
 
-    public abstract void When(DomainEventBase domainEvent);
+    public abstract void When(object domainEvent);
 
-    public DomainEventBase[] DequeueUncommittedEvents()
+    public object[] DequeueUncommittedEvents()
     {
         var dequeuedEvents = uncommittedEvents.ToArray();
 
@@ -26,7 +26,7 @@ public abstract class Aggregate<T> : IAggregate<T> where T : notnull
         return dequeuedEvents;
     }
 
-    protected void Apply(DomainEventBase domainEvent)
+    protected void Apply(object domainEvent)
     {
         When(domainEvent);
         uncommittedEvents.Enqueue(domainEvent);

@@ -3,7 +3,7 @@ using Homees.Domain.Common.Events;
 
 namespace Homees.Domain.Aggregates.Lights.Events;
 
-public record LightCreated(Guid Id, string Name) : DomainEventBase
+public record LightCreated(Guid Id, string Name)
 {
     public static LightCreated Create(Guid id, string name)
     {

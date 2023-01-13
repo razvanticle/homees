@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="EventStore.Client.Grpc.Streams" Version="22.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Homees.Application\Homees.Application.csproj" />
+        <ProjectReference Include="..\Homees.Domain\Homees.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

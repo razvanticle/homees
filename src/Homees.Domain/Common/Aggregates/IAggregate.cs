@@ -11,5 +11,5 @@ public interface IAggregate<out T> : IProjection
     T Id { get; }
     int Version { get; }
 
-    DomainEventBase[] DequeueUncommittedEvents();
+    object[] DequeueUncommittedEvents();
 }

@@ -13,7 +13,8 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         this.validators = validators;
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+        RequestHandlerDelegate<TResponse> next)
     {
         if (validators.Any())
         {
@@ -31,7 +32,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
             if (failures.Any())
                 throw new ValidationException(failures);
         }
-        
+
         return await next();
     }
 }

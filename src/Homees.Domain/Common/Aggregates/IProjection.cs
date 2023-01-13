@@ -4,5 +4,5 @@ namespace Homees.Domain.Common.Aggregates;
 
 public interface IProjection
 {
-    void When(DomainEventBase domainEvent);
+    void When(object domainEvent);
 }

@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Homees.Application\Homees.Application.csproj" />
-        <ProjectReference Include="..\Homees.Infrastructure\Homees.Infrastructure.csproj" />
+        <ProjectReference Include="..\Homees.Application\Homees.Application.csproj"/>
+        <ProjectReference Include="..\Homees.Infrastructure\Homees.Infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>

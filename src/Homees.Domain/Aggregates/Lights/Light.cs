@@ -7,6 +7,10 @@ namespace Homees.Domain.Aggregates.Lights;
 
 public class Light : Aggregate
 {
+    private Light()
+    {
+    }
+    
     public Light(Guid id, string name)
     {
         var domainEvent = LightCreated.Create(id, name);
@@ -22,7 +26,7 @@ public class Light : Aggregate
 
     public byte DimmerValue { get; private set; }
 
-    public override void When(DomainEventBase domainEvent)
+    public override void When(object domainEvent)
     {
         switch (domainEvent)
         {
@@ -103,32 +107,44 @@ public class Light : Aggregate
     
     private void OnLightCreated(LightCreated domainEvent)
     {
+        Version = 0;
+        
         Id = domainEvent.Id;
         Name = domainEvent.Name;
     }
     
     private void OnLightTurnedOn(LightTurnedOn domainEvent)
     {
+        Version++;
+        
         IsOn = true;
     }
     
     private void OnLightTurnedOff(LightTurnedOff domainEvent)
     {
+        Version++;
+        
         IsOn = false;
     }
     
     private void OnLightDisconnected(LightDisconnected domainEvent)
     {
+        Version++;
+        
         ConnectionStatus = DeviceConnectionStatus.Disconnected;
     }
 
     private void OnLightConnected(LightConnected domainEvent)
     {
+        Version++;
+        
         ConnectionStatus = DeviceConnectionStatus.Connected;
     }
 
     private void OnLightDimmerValueUpdated(LightDimmerValueUpdated domainEvent)
     {
+        Version++;
+        
         DimmerValue = domainEvent.Value;
         IsOn = true;
     }
